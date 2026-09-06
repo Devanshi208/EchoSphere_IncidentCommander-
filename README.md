@@ -39,3 +39,49 @@ EchoSphere joins a live incident call through Agora as a real voice participant 
 - **Email:** Resend
 
 ## How it works
+
+person speaks → Agora STT → POST /api/agora/llm
+→ src/lib/extract.ts (Claude, forced tool-use JSON)
+→ src/lib/merge.ts (validates + applies to state)
+→ src/lib/store.ts (Upstash Redis, shared state)
+→ dashboard polls /api/state and re-renders live
+
+**Architecture principle:** The LLM never writes state directly. It returns structured output that is validated before touching the incident record — so a malformed response can't break the system.
+
+### Key files
+
+| File | Purpose |
+|---|---|
+| `src/lib/types.ts` | The full incident data model |
+| `src/lib/extract.ts` | The only place the LLM is called for extraction |
+| `src/lib/merge.ts` | Validates extraction output into state changes |
+| `src/lib/summary.ts` | Final report generator |
+| `src/lib/agora.ts` | Agora Conversational AI REST helpers |
+| `src/lib/agoraToken.ts` | Signed RTC token generation |
+| `src/app/api/agora/llm/route.ts` | The webhook Agora calls on every turn |
+| `src/app/room/page.tsx` | The live incident dashboard |
+
+## Running locally
+
+You need Node.js 18+ and pnpm.
+
+```bash
+pnpm install
+cp .env.local.example .env.local
+```
+
+Fill in `.env.local` with your keys (Anthropic, Agora App ID + Certificate + Customer Key/Secret, ElevenLabs, Upstash Redis, Resend), then:
+
+```bash
+pnpm dev
+```
+
+Open http://localhost:3000
+
+> **Note:** Don't run this from inside a cloud-synced folder (OneDrive, Dropbox, etc.) — sync services lock files while the dev server runs and cause hard-to-debug issues.
+
+---
+
+**From "What did everyone say?" to "What do we currently know, what are we missing, and what happens next?"**
+
+*Built by Neural Narrators — Devanshi Sharma & Aviral Arora*
