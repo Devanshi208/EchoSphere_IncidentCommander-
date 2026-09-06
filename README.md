@@ -1,4 +1,4 @@
-# EchoSphere — Voice-Native AI Incident Commander
+# EchoSphere: Voice AI Incident Commander
 
 **Most AI meeting tools summarize what was said. EchoSphere maintains what is currently known — live, while the incident is still happening.**
 
