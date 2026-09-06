@@ -3,7 +3,8 @@
 **Most AI meeting tools summarize what was said. EchoSphere maintains what is currently known — live, while the incident is still happening.**
 
 **Live demo:** https://echosphere-three.vercel.app
-   **GitHub:** https://github.com/Devanshi208/EchoSphere_IncidentCommander-
+
+**GitHub:** https://github.com/Devanshi208/EchoSphere_IncidentCommander-
 
 > **The core principle:** The AI organizes evidence and uncertainty. It does not manufacture certainty.
 
