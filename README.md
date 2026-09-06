@@ -61,27 +61,6 @@ person speaks → Agora STT → POST /api/agora/llm
 | `src/app/api/agora/llm/route.ts` | The webhook Agora calls on every turn |
 | `src/app/room/page.tsx` | The live incident dashboard |
 
-## Running locally
-
-You need Node.js 18+ and pnpm.
-
-```bash
-pnpm install
-cp .env.local.example .env.local
-```
-
-Fill in `.env.local` with your keys (Anthropic, Agora App ID + Certificate + Customer Key/Secret, ElevenLabs, Upstash Redis, Resend), then:
-
-```bash
-pnpm dev
-```
-
-Open http://localhost:3000
-
-> **Note:** Don't run this from inside a cloud-synced folder (OneDrive, Dropbox, etc.) — sync services lock files while the dev server runs and cause hard-to-debug issues.
-
----
-
 **From "What did everyone say?" to "What do we currently know, what are we missing, and what happens next?"**
 
 *Built by Neural Narrators — Devanshi Sharma & Aviral Arora*
